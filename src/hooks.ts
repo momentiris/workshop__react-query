@@ -2,17 +2,15 @@ import axios, { AxiosError } from 'axios';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { AddPetRequest, Pet } from './types';
 
-export const usePets = () => {
-  return useQuery<Pet[], AxiosError>(['pets'], () =>
+export const usePets = () =>
+  useQuery<Pet[], AxiosError>(['pets'], () =>
     axios.get<Pet[]>('/api/pets').then((res) => res.data)
   );
-};
 
-export const usePetById = ({ id }: { id: string }) => {
-  return useQuery<Pet, AxiosError>(['pet', id], () =>
+export const usePetById = ({ id }: { id: string }) =>
+  useQuery<Pet, AxiosError>(['pet', id], () =>
     axios.get<Pet>(`/api/pet/${id}`).then((res) => res.data)
   );
-};
 
 export const useCreatePet = () => {
   const queryClient = useQueryClient();
