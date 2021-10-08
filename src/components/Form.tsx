@@ -91,7 +91,7 @@ const Form = ({ initialValues, onSubmit }: FormProps) => {
         >
           <option />
           {animals.map((animal) => (
-            <option selected={animal === fields.type} value={animal}>
+            <option key={animal} value={animal}>
               {animal}
             </option>
           ))}
