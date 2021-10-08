@@ -22,10 +22,11 @@ export const handlers = [
     const Pet = { ...req.body, createdAt: new Date(), id: uuidv4() };
 
     if (Math.random() > 0.5) {
-      return res(ctx.status(500));
+      return res(ctx.delay(1000), ctx.status(500));
     }
+
     Pets.push(Pet);
-    return res(ctx.status(200), ctx.json(Pet));
+    return res(ctx.delay(1000), ctx.status(200), ctx.json(Pet));
   }),
   rest.put<Pet, Pet>('/api/pet/:id', (req, res, ctx) => {
     const newPet = {

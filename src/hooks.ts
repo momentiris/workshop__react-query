@@ -43,8 +43,8 @@ export const useCreatePet = () => {
       },
       // If the mutation fails, use the context returned from onMutate to roll back
       onError: (err, variables, context) => {
-        if (context?.previousTodos) {
-          queryClient.setQueryData<Pet[]>('pets', context.previousTodos);
+        if (context?.previousPets) {
+          queryClient.setQueryData<Pet[]>('pets', context.previousPets);
         }
       },
       // Always refetch after error or success:
