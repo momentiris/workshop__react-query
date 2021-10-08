@@ -1,4 +1,5 @@
 import React from 'react';
+import PetCount from './components/PetCount';
 
 import PetDetails from './components/PetDetails';
 import Pets from './components/Pets';
@@ -9,11 +10,15 @@ function App() {
   return (
     <div className="w-screen h-screen flex">
       <Sidebar>
-        <div
-          className="cursor-pointer underline"
-          onClick={() => setSelectedId(undefined)}
-        >
-          All Pets
+        <div>
+          <div
+            className="cursor-pointer underline mb-10"
+            onClick={() => setSelectedId(undefined)}
+          >
+            All Pets
+          </div>
+
+          <PetCount />
         </div>
       </Sidebar>
       <div className="p-4">
