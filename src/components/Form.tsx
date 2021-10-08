@@ -23,11 +23,11 @@ type FormProps = {
 const Form = ({ initialValues, onSubmit }: FormProps) => {
   const [fields, setFields] = React.useState<FormFields>(defaultValues);
 
-  // React.useEffect(() => {
-  //   if (initialValues) {
-  //     setFields(initialValues);
-  //   }
-  // }, [initialValues]);
+  React.useEffect(() => {
+    if (initialValues) {
+      setFields(initialValues);
+    }
+  }, [initialValues]);
 
   const updateFromKey =
     (key: keyof FormFields) =>
@@ -91,7 +91,7 @@ const Form = ({ initialValues, onSubmit }: FormProps) => {
         >
           <option />
           {animals.map((animal) => (
-            <option selected={animal === fields.type} value={animal}>
+            <option key={animal} value={animal}>
               {animal}
             </option>
           ))}

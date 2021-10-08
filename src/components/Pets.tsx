@@ -16,7 +16,7 @@ const Pets = ({ onClick }: { onClick: (id: string) => void }) => {
       )}
       <div className="h-1/2">
         {isLoading && (
-          <div className="right-5 top-5 border-4 border-dashed border-yellow-400 rounded-md p-2">
+          <div className="border-4 border-dashed border-yellow-400 rounded-md p-2 flex justify-start">
             Loading pets...
           </div>
         )}
