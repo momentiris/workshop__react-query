@@ -1,6 +1,5 @@
 import React from 'react';
 import { usePets } from '../hooks';
-
 const PetCount = () => {
   const { data } = usePets();
 

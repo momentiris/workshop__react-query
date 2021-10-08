@@ -9,7 +9,7 @@ let Pets: Pet[] = Array.from({ length: 10 }).map(createRandomPet);
 
 export const handlers = [
   rest.get('/api/pets', (req, res, ctx) =>
-    res(ctx.delay(500), ctx.status(200), ctx.json(Pets))
+    res(ctx.delay(2000), ctx.status(200), ctx.json(Pets))
   ),
   rest.get<any, any, FindPetByIdRequest>('/api/pet/:id', (req, res, ctx) => {
     return res(
@@ -21,6 +21,9 @@ export const handlers = [
   rest.post<AddPetRequest, Pet>('/api/pet', (req, res, ctx) => {
     const Pet = { ...req.body, createdAt: new Date(), id: uuidv4() };
 
+    if (Math.random() > 0.5) {
+      return res(ctx.status(500));
+    }
     Pets.push(Pet);
     return res(ctx.status(200), ctx.json(Pet));
   }),
