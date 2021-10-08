@@ -1,4 +1,5 @@
 import React from 'react';
+import { animals } from '../mocks/handlers';
 
 type FormFields = {
   name: string;
@@ -30,7 +31,11 @@ const Form = ({ initialValues, onSubmit }: FormProps) => {
 
   const updateFromKey =
     (key: keyof FormFields) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    (
+      e: React.ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >
+    ) =>
       setFields((currentState) =>
         Object.assign({}, currentState, { [key]: e.target.value })
       );
@@ -77,14 +82,20 @@ const Form = ({ initialValues, onSubmit }: FormProps) => {
         <label className="block text-sm" htmlFor="type">
           Type
         </label>
-        <input
+        <select
           className="border border-black px-2 py-1 rounded-md text-sm"
           required
-          type="text"
           id="type"
           value={fields.type}
           onChange={updateFromKey('type')}
-        />
+        >
+          <option />
+          {animals.map((animal) => (
+            <option selected={animal === fields.type} value={animal}>
+              {animal}
+            </option>
+          ))}
+        </select>
       </div>
       <div>
         <label className="block text-sm" htmlFor="about">
