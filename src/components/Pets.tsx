@@ -2,10 +2,9 @@ import React from 'react';
 
 import Form from './Form';
 import { useCreatePet, usePets } from '../hooks';
-import { animals } from '../mocks/handlers';
 
 const Pets = ({ onClick }: { onClick: (id: string) => void }) => {
-  const { data, isLoading, isFetching } = usePets();
+  const { data, isLoading, isFetching, refetch } = usePets();
   const { mutate: createPet } = useCreatePet();
 
   return (

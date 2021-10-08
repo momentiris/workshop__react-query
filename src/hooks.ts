@@ -18,44 +18,52 @@ const initialState = {
 export const usePets = () => {
   const [state, setState] = React.useState<DataState<Pet[]>>(initialState);
 
-  React.useEffect(() => {
-    setState((current) => Object.assign({}, current, { loading: true }));
+  const get = () => {
+    setState((current) => Object.assign({}, current, { isLoading: true }));
     axios
       .get<Pet[]>('/api/pets')
       .then((res) =>
         setState((current) =>
-          Object.assign({}, current, { loading: false, data: res.data })
+          Object.assign({}, current, { isLoading: false, data: res.data })
         )
       );
+  };
+
+  React.useEffect(() => {
+    get();
   }, []);
 
-  return { ...state, isFetching: state.isLoading };
+  return { ...state, isFetching: state.isLoading, refetch: get };
 };
 
 export const usePetById = ({ id }: { id: string }) => {
   const [state, setState] = React.useState<DataState<Pet>>(initialState);
 
-  React.useEffect(() => {
-    setState((current) => Object.assign({}, current, { loading: true }));
+  const get = () => {
+    setState((current) => Object.assign({}, current, { isLoading: true }));
     axios
       .get<Pet[]>(`/api/pet/${id}`)
       .then((res) =>
         setState((current) =>
-          Object.assign({}, current, { loading: false, data: res.data })
+          Object.assign({}, current, { isLoading: false, data: res.data })
         )
       );
+  };
+
+  React.useEffect(() => {
+    get();
   }, []);
 
-  return { ...state, isFetching: state.isLoading };
+  return { ...state, isFetching: state.isLoading, refetch: get };
 };
 
 export const useCreatePet = () => {
   const [state, setState] = React.useState<DataState<Pet>>(initialState);
-  const mutate = (pet: Pet) => {
-    setState((current) => Object.assign({}, current, { loading: true }));
+  const mutate = (pet: AddPetRequest) => {
+    setState((current) => Object.assign({}, current, { isLoading: true }));
     return axios.post<AddPetRequest, Pet>('/api/pet', pet).then((res) => {
       setState((current) =>
-        Object.assign({}, current, { loading: false, data: res })
+        Object.assign({}, current, { isLoading: false, data: res })
       );
     });
   };
@@ -66,12 +74,12 @@ export const useCreatePet = () => {
 export const useUpdatePet = () => {
   const [state, setState] = React.useState<DataState<Pet>>(initialState);
   const mutate = (pet: Pet) => {
-    setState((current) => Object.assign({}, current, { loading: true }));
+    setState((current) => Object.assign({}, current, { isLoading: true }));
     return axios
       .put<AddPetRequest, Pet>(`/api/pet/${pet.id}`, pet)
       .then((res) => {
         setState((current) =>
-          Object.assign({}, current, { loading: false, data: res })
+          Object.assign({}, current, { isLoading: false, data: res })
         );
       });
   };

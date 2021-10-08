@@ -23,11 +23,11 @@ type FormProps = {
 const Form = ({ initialValues, onSubmit }: FormProps) => {
   const [fields, setFields] = React.useState<FormFields>(defaultValues);
 
-  React.useEffect(() => {
-    if (initialValues) {
-      setFields(initialValues);
-    }
-  }, [initialValues]);
+  // React.useEffect(() => {
+  //   if (initialValues) {
+  //     setFields(initialValues);
+  //   }
+  // }, [initialValues]);
 
   const updateFromKey =
     (key: keyof FormFields) =>
